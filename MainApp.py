@@ -81,11 +81,11 @@ def vector_field_histogram(obstacles, x, y, theta):
     
     min_dist = np.min(distances)
     
-    # Prioritaskan menghindar jika ada garis sektor yang menabrak obstacle
+
     immediate_avoidance = None
     for i, (collision, angle) in enumerate(zip(sector_collision_flags, sector_angles)):
         if collision:
-            immediate_avoidance = angle + np.pi/2 if i < 2 else angle - np.pi/2  # Belok berlawanan arah
+            immediate_avoidance = angle + np.pi/2 if i < 2 else angle - np.pi/2 
             break
     
     if immediate_avoidance is not None:
@@ -95,9 +95,9 @@ def vector_field_histogram(obstacles, x, y, theta):
         right_clearance = np.mean(sector_distances[3:]) 
         
         if left_clearance < right_clearance:
-            avoidance_angle = sector_angles[np.argmax(sector_distances[3:])+3]  # Pilih sektor kanan yang paling aman
+            avoidance_angle = sector_angles[np.argmax(sector_distances[3:])+3]  
         else:
-            avoidance_angle = sector_angles[np.argmax(sector_distances[:2])]  # Pilih sektor kiri yang paling aman
+            avoidance_angle = sector_angles[np.argmax(sector_distances[:2])]  
     else:
         avoidance_angle = None
     
@@ -122,7 +122,6 @@ def get_direction_label(norm_angle):
     else:
         return "RC"  
 
-# Fungsi untuk input obstacle statis
 def input_obstacle_static(num_obstacles):
     obstacles = []
     fig, ax = plt.subplots(figsize=(8, 6))
